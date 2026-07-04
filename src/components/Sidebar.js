@@ -1,48 +1,77 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { MdHome, MdLiveTv, MdOndemandVideo } from 'react-icons/md';
+import { SiYoutubeshorts } from 'react-icons/si';
 
 const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
-  
-  
-  if(!isMenuOpen) return null;
+  const location = useLocation();
 
+  if (!isMenuOpen) return null;
 
-return (
-    <div className="w-48 px-2 py-1 overflow-y-auto h-screen sticky top-14">
+  const isHomeActive = location.pathname === '/';
 
-        <ul className="mb-2">
-            <li><Link to="/" className="flex px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-gray-100">Home</Link></li>
-            <li><span className="flex px-3 py-1.5 rounded-lg text-xs hover:bg-gray-100 cursor-pointer">Shorts</span></li>
-            <li><span className="flex px-3 py-1.5 rounded-lg text-xs hover:bg-gray-100 cursor-pointer">Videos</span></li>
-            <li><span className="flex px-3 py-1.5 rounded-lg text-xs hover:bg-gray-100 cursor-pointer">Live</span></li>
-        </ul>
+  return (
+      <div className="hidden md:block w-56 flex-shrink-0 px-3 py-3 overflow-y-auto h-screen sticky top-14">
 
-        <hr className="border-gray-200 mb-2" />
+      <ul className="mb-3">
+        <li>
+          <Link
+            to="/"
+            className={`flex items-center gap-4 px-3 py-2.5 rounded-lg text-sm ${
+              isHomeActive ? 'bg-gray-100 font-semibold' : 'font-medium hover:bg-gray-100'
+            }`}
+          >
+            <MdHome className="text-xl" /> Home
+          </Link>
+        </li>
+        <li>
+          <span className="flex items-center gap-4 px-3 py-2.5 rounded-lg text-sm hover:bg-gray-100 cursor-pointer">
+            <SiYoutubeshorts className="text-xl" /> Shorts
+          </span>
+        </li>
+        <li>
+        <span className="flex items-center gap-4 px-3 py-2.5 rounded-lg text-sm hover:bg-gray-100 cursor-pointer">
+        <span className="text-xl text-black">▶</span>
+        Subscriptions
+        </span>
+       </li>
+        <li>
+          <span className="flex items-center gap-4 px-3 py-2.5 rounded-lg text-sm hover:bg-gray-100 cursor-pointer">
+            <MdLiveTv className="text-xl" /> Live
+          </span>
+        </li>
+      </ul>
 
-        <h2 className="text-xs font-semibold px-3 mb-1 text-gray-500 uppercase tracking-wide">Subscriptions</h2>
-        <ul className="mb-2">
-            {["Music", "Sports", "Gaming", "Movies"].map((item) => (
-                <li key={item}>
-                    <span className="flex px-3 py-1.5 rounded-lg text-xs hover:bg-gray-100 cursor-pointer">{item}</span>
-                </li>
-            ))}
-        </ul>
+      <hr className="border-gray-200 mb-3" />
 
-        <hr className="border-gray-200 mb-2" />
+      <h2 className="text-sm font-semibold px-3 mb-1 text-gray-900">Subscriptions</h2>
+      <ul className="mb-3">
+        {["Music", "Sports", "Gaming", "Movies"].map((item) => (
+          <li key={item}>
+            <span className="flex items-center gap-4 px-3 py-2 rounded-lg text-sm hover:bg-gray-100 cursor-pointer">
+              <MdOndemandVideo className="text-lg text-gray-500" /> {item}
+            </span>
+          </li>
+        ))}
+      </ul>
 
-        <h2 className="text-xs font-semibold px-3 mb-1 text-gray-500 uppercase tracking-wide">Watch Later</h2>
-        <ul>
-            {["Music", "Sports", "Gaming", "Movies"].map((item) => (
-                <li key={item}>
-                    <span className="flex px-3 py-1.5 rounded-lg text-xs hover:bg-gray-100 cursor-pointer">{item}</span>
-                </li>
-            ))}
-        </ul>
+      <hr className="border-gray-200 mb-3" />
+
+      <h2 className="text-sm font-semibold px-3 mb-1 text-gray-900">Watch Later</h2>
+      <ul>
+        {["Music", "Sports", "Gaming", "Movies"].map((item) => (
+          <li key={item}>
+            <span className="flex items-center gap-4 px-3 py-2 rounded-lg text-sm hover:bg-gray-100 cursor-pointer">
+              <MdOndemandVideo className="text-lg text-gray-500" /> {item}
+            </span>
+          </li>
+        ))}
+      </ul>
 
     </div>
-);
+  );
 };
 
 export default Sidebar;

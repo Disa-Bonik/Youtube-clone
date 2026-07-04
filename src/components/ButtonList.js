@@ -15,6 +15,10 @@ const ButtonList = () => {
       <Button name="Vlogs"/>
       <Button name="Movies"/>
       <Button name="Podcasts"/>
+      <Button name="Comedy"/>
+      <Button name="Programming"/>
+      <Button name="Music"/>
+      <Button name="Technology"/>
       <Button name="Web series"/>
     </div>
   );
