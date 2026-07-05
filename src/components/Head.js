@@ -32,7 +32,7 @@ const Head = () => {
 
     const getEsarchSuggestions = async () => {
         try {
-            const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+            const data = await fetch(YOUTUBE_SEARCH_API(searchQuery));
             if (!data.ok) throw new Error("Search API failed with status " + data.status);
             const json = await data.json();
             const results = json[1] || [];
